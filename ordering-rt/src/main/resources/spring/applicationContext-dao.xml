@@ -54,34 +54,16 @@
 		<property name="globalRollbackOnParticipationFailure" value="true"/>
 	</bean>
 
-	<!-- 注解式事务 -->
-	<tx:annotation-driven transaction-manager="transactionManager"/>
-	<tx:advice id="txAdvice" transaction-manager="transactionManager">
-		<tx:attributes>
-			<!-- 读取数据方法，一般采用只读事务 -->
-			<tx:method name="query*" read-only="true" propagation="SUPPORTS"/>
-			<!--其他方法，如save，update，insert等对数据库进行写入操作的方法，当产生ServiceException进行回滚 -->
-			<tx:method name="*" propagation="SUPPORTS"/>
-		</tx:attributes>
-	</tx:advice>
-
-	<aop:config proxy-target-class="true">
-		<aop:advisor pointcut="execution(* com.logyin.ordering.service.*.*(..))"
-			advice-ref="txAdvice"/>
-	</aop:config>
-
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"/>
-		<!-- 指定sqlMapConfig总配置文件，订制的environment在spring容器中不在生效 -->
-		<!-- <property name="configLocation" value="classpath:/config/sqlMapConfig.xml"/> -->
-		<property name="mapperLocations"
-			value="classpath*:com/logyin/orering/dal/mapper/*.xml"/>
-
-		<property name="typeAliasesPackage" value="com.logyin.ordering.dal.model"/>
 	</bean>
 
-	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg index="0" ref="sqlSessionFactory"/>
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.logyin.ordering.dal.mapper"/>
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
 	</bean>
+
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+
 
 </beans>

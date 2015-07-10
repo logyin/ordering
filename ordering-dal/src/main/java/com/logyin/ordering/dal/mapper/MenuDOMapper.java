@@ -3,15 +3,16 @@ package com.logyin.ordering.dal.mapper;
 import com.logyin.ordering.dal.model.MenuDO;
 
 public interface MenuDOMapper {
-    int deleteByPrimaryKey(Integer menuId);
+	int deleteByPrimaryKey(Integer menuId);
 
-    int insert(MenuDO record);
+	int insert(MenuDO record);
 
-    int insertSelective(MenuDO record);
+	int insertSelective(MenuDO record);
 
-    MenuDO selectByPrimaryKey(Integer menuId);
+	MenuDO selectByPrimaryKey(Integer menuId);
 
-    int updateByPrimaryKeySelective(MenuDO record);
+	int updateByPrimaryKeySelective(MenuDO record);
 
-    int updateByPrimaryKey(MenuDO record);
+	int updateByPrimaryKey(MenuDO record);
+
 }
