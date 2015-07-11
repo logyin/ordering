@@ -1,6 +1,5 @@
 package com.logyin.ordering.rt.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.logyin.ordering.common.dto.BaseRequest;
 import com.logyin.ordering.common.dto.BaseResponse;
 
@@ -14,8 +13,5 @@ public abstract class AbstractController<Req extends BaseRequest, Resp extends B
 		return handleResponse(req, resp);
 	}
 
-	public String handleResponse(Req req, Resp resp) {
-
-		return JSON.toJSONString(resp, true);
-	}
+	public abstract String handleResponse(Req req, Resp resp);
 }

@@ -25,7 +25,7 @@ public class QueryMenuController extends
 	private MenuService menuservice;
 
 	@Override
-	@RequestMapping(value = "/queryMenu", method = RequestMethod.POST)
+	@RequestMapping(value = "/queryMenu", method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
 	public @ResponseBody
 	String entry(@RequestBody QuertMenuRequest req) {
 		logger.info("queryMenu request:{}", JSON.toJSONString(req, true));
@@ -36,21 +36,19 @@ public class QueryMenuController extends
 
 		String response = this.execute(req, resp);
 
-		logger.info("queryMenu response:{}", JSON.toJSONString(resp, true));
+		logger.info("queryMenu response:{}", response);
 
 		return response;
 	}
 
 	@Override
 	public String handleRequest(QuertMenuRequest req, QuertMenuResponse resp) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public String handleResponse(QuertMenuRequest req, QuertMenuResponse resp) {
-		// TODO Auto-generated method stub
-		return null;
+		return JSON.toJSONString(resp, true);
 	}
 
 }

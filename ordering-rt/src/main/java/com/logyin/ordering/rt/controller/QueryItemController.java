@@ -25,7 +25,7 @@ public class QueryItemController extends
 	private ItemService itemService;
 
 	@Override
-	@RequestMapping(value = "/queryItem", method = RequestMethod.POST)
+	@RequestMapping(value = "/queryItem", method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
 	public @ResponseBody
 	String entry(@RequestBody QuertItemRequest req) {
 		logger.info("queryItem request:{}", JSON.toJSONString(req, true));
@@ -36,21 +36,19 @@ public class QueryItemController extends
 
 		String response = this.execute(req, resp);
 
-		logger.info("queryItem response:{}", JSON.toJSONString(resp, true));
+		logger.info("queryItem response:{}", response);
 
 		return response;
 	}
 
 	@Override
 	public String handleRequest(QuertItemRequest req, QuertItemResponse resp) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public String handleResponse(QuertItemRequest req, QuertItemResponse resp) {
-		// TODO Auto-generated method stub
-		return null;
+		return JSON.toJSONString(resp, true);
 	}
 
 }
